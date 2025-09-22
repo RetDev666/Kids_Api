@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+users:
+build: ./users_service
+ports:
+- "8001:8001"
+
+lessons:
+
+build: ./lessons_service
+
+ports:
+
+- "8002:8002"
+
+gateway:
+
+build: ./gateway
+
+environment:
+
+USERS_URL: http://users:8001
+
+LESSONS_URL: http://lessons:8002
+
+ports:
+
+- "8000:8000"
+
+`depends_on:
+
+- users
+
+- lessons
